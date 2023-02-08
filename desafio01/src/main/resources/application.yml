@@ -1,0 +1,8 @@
+server:
+  port: 8080
+        
+# spring Configs        
+spring:
+  # Jackson Configs
+  jackson:
+    default-property-inclusion: NON_NULL
