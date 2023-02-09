@@ -1,9 +1,8 @@
 package br.com.conexa.model;
 
 import java.io.Serializable;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Objects;
 
 import jakarta.persistence.Column;
@@ -36,13 +35,13 @@ public class Film implements Serializable {
 	
 	@Column(name = "release_date", nullable = false)
 	@Temporal(TemporalType.DATE)
-	public Date releaseDate;
+	public LocalDate releaseDate;
 
 	public Film() {
 		super();
 	}
 	
-	public Film(Long id, String title, Integer episode, String director, Date releaseDate) {
+	public Film(Long id, String title, Integer episode, String director, LocalDate releaseDate) {
 		super();
 		this.id = id;
 		this.title = title;
@@ -51,7 +50,7 @@ public class Film implements Serializable {
 		this.releaseDate = releaseDate;
 	}
 
-	public Film(String title, Integer episode, String director, Date releaseDate) {
+	public Film(String title, Integer episode, String director, LocalDate releaseDate) {
 		this(null, title, episode, director, releaseDate);
 	}
 
@@ -79,18 +78,18 @@ public class Film implements Serializable {
 		this.director = director;
 	}
 
-	public Date getReleaseDate() {
+	public LocalDate getReleaseDate() {
 		return releaseDate;
 	}
 
-	public void setReleaseDate(Date releaseDate) {
+	public void setReleaseDate(LocalDate releaseDate) {
 		this.releaseDate = releaseDate;
 	}
 
 	public String getReleaseDateStr() {
 		if(releaseDate != null) {
-			DateFormat targetFormat = new SimpleDateFormat("dd/MM/yyyy");
-			return targetFormat.format(releaseDate);
+			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+			return releaseDate.format(formatter);
 		}else {
 			return null;
 		}

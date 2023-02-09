@@ -29,7 +29,7 @@ public class FilmService {
 		this.filmRepository = filmRepository;
 	}
 	
-	public void handleLukeFilmography() {
+	public List<Film> handleLukeFilmography() {
 		
 		var searchForLukeResult = getFilmList();
 
@@ -37,11 +37,9 @@ public class FilmService {
 			
 			List<Film> persistedFilms = saveFilmList(searchForLukeResult.get());
 			
-			if(persistedFilms != null) {
-				persistedFilms.stream().forEach( f -> System.out.println(f));
-			}
-			
+			return persistedFilms;
 		}	
+		return null;
 	}
 
 	private List<Film> saveFilmList(FilmDTO[] filmDTOs) {
@@ -65,7 +63,7 @@ public class FilmService {
 		newRelease.setTitle("Final Battle");
 		newRelease.setEpisode(7);
 		newRelease.setDirector("James Cameron");
-		newRelease.setReleaseDate("13/10/1983");
+		newRelease.setReleaseDate("13/10/2023");
 		
 		return newRelease;
 	}

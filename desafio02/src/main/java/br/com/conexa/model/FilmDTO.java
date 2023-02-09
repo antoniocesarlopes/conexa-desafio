@@ -3,6 +3,8 @@ package br.com.conexa.model;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 
 import org.apache.commons.lang3.StringUtils;
@@ -66,15 +68,10 @@ public class FilmDTO {
 		this.releaseDate = releaseDate;
 	}
 	
-	public Date getReleaseDateFormated() {
+	public LocalDate getReleaseDateFormated() {
 		if(StringUtils.isNotBlank(this.releaseDate)) {
-			DateFormat format = new SimpleDateFormat("dd/MM/yyyy");
-	        try {
-				Date parsedDate = format.parse(this.releaseDate);
-				return parsedDate;
-			} catch (ParseException e) {
-				return null;
-			}
+	        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+			return LocalDate.parse(this.releaseDate, formatter);
 		}
 		return null;
 	}
