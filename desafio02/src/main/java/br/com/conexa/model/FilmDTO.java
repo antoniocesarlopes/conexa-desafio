@@ -11,7 +11,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 @JsonPropertyOrder({"title", "episode", "director", "releaseDate"})
-public class Film {
+public class FilmDTO {
 	
 	@JsonProperty("title")
 	public String title;
@@ -22,11 +22,11 @@ public class Film {
 	@JsonProperty("release_date")
 	public String releaseDate;
 
-	public Film() {
+	public FilmDTO() {
 		super();
 	}
 
-	public Film(String title, Integer episode, String director, String releaseDate) {
+	public FilmDTO(String title, Integer episode, String director, String releaseDate) {
 		super();
 		this.title = title;
 		this.episode = episode;
@@ -59,24 +59,29 @@ public class Film {
 	}
 
 	public String getReleaseDate() {
-		if(StringUtils.isNotBlank(releaseDate)) {
-			//			1977-05-25
-			DateFormat originalFormat = new SimpleDateFormat("yyyy-MM-dd");
-			DateFormat targetFormat = new SimpleDateFormat("dd/MM/yyyy");
-			Date date;
-			try {
-				date = originalFormat.parse(releaseDate);
-			} catch (ParseException e) {
-				return releaseDate;
-			}
-			return targetFormat.format(date);
-		}else {
-			return releaseDate;
-		}
+		return releaseDate;
 	}
 
 	public void setReleaseDate(String releaseDate) {
 		this.releaseDate = releaseDate;
+	}
+	
+	public Date getReleaseDateFormated() {
+		if(StringUtils.isNotBlank(this.releaseDate)) {
+			DateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+	        try {
+				Date parsedDate = format.parse(this.releaseDate);
+				return parsedDate;
+			} catch (ParseException e) {
+				return null;
+			}
+		}
+		return null;
+	}
+	
+	@Override
+	public String toString() {
+		return "Film [title=" + title + ", episode=" + episode + ", director=" + director + ", releaseDate=" + getReleaseDate() + "]";
 	}
 
 }

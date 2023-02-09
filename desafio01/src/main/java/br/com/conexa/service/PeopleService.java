@@ -1,12 +1,7 @@
 package br.com.conexa.service;
 
-import java.util.Arrays;
 import java.util.Optional;
 
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
